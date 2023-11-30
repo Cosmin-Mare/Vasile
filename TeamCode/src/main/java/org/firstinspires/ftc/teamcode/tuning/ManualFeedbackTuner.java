@@ -23,6 +23,8 @@ public final class ManualFeedbackTuner extends LinearOpMode {
                 }
             } else if (drive.localizer instanceof ThreeDeadWheelLocalizer) {
                 if (ThreeDeadWheelLocalizer.PARAMS.perpXTicks == 0 && ThreeDeadWheelLocalizer.PARAMS.par0YTicks == 0 && ThreeDeadWheelLocalizer.PARAMS.par1YTicks == 1) {
+                    telemetry.addData("AAAA", "AAAAAAAA");
+                    telemetry.update();
                     throw new AssertionError("Odometry wheel locations not set! Run AngularRampLogger to tune them.");
                 }
             }

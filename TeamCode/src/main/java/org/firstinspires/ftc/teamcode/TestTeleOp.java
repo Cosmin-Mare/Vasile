@@ -1,11 +1,14 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.roadrunner.PoseVelocity2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 enum IntakeState {
     INTAKE,
@@ -28,6 +31,7 @@ public class TestTeleOp extends OpMode {
 
     @Override
     public void init() {
+        telemetry = FtcDashboard.getInstance().getTelemetry();
         time = new ElapsedTime();
         robot = new Robot(hardwareMap, telemetry, time);
 //        robot.lift.move_set_pos(30000, telemetry);
@@ -36,6 +40,9 @@ public class TestTeleOp extends OpMode {
     @Override
     public void loop() {
         telemetry.addData("lift position", robot.lift.descending.getCurrentPosition());
+        telemetry.addData("Par0", ((ThreeDeadWheelLocalizer) robot.drive.localizer).par0.getPositionAndVelocity().position);
+        telemetry.addData("Par1", ((ThreeDeadWheelLocalizer) robot.drive.localizer).par1.getPositionAndVelocity().position);
+        telemetry.addData("Perp", ((ThreeDeadWheelLocalizer) robot.drive.localizer).perp.getPositionAndVelocity().position);
         robot.drive.setDrivePowers(new PoseVelocity2d(
                 new Vector2d(
                         -gamepad1.left_stick_y,
