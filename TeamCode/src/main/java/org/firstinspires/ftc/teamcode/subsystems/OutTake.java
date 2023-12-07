@@ -20,7 +20,7 @@ public class OutTake {
     }
 
     public void prepareCatch(){
-        servoBrat.setPosition(0.2);
+        servoBrat.setPosition(0.5);
         releasePixels();
 
     }
@@ -31,7 +31,7 @@ public class OutTake {
     }
 
     public void catchPixels(){
-        dreaptaGripper.setPosition(0.85);
+        dreaptaGripper.setPosition(0.55);
         stangaGripper.setPosition(0.1);
     }
 
@@ -42,7 +42,7 @@ public class OutTake {
         stangaGripper.setPosition(0);
     }
     public void releasePixels(){
-        releasePixelLeft();
-        releasePixelRight();
+        stangaGripper.setPosition(0);
+        dreaptaGripper.setPosition(0.8);
     }
 }

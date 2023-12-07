@@ -97,32 +97,49 @@ public class TestTeleOp extends OpMode {
         } else if (gamepad1.dpad_up) {
             robot.outTake.prepareRelease();
         }
+//        if (gamepad1.dpad_down) {
+//            robot.outTake.brat.setPower(1);
+//            if (robot.outTake.brat.getCurrentPosition() < 4 && robot.outTake.brat.getCurrentPosition() > -3) {
+//                robot.outTake.brat.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//            }
+//        } else if (gamepad1.dpad_up) {
+//            robot.outTake.brat.setPower(-1);
+//            if (robot.outTake.brat.getCurrentPosition() < -335 && robot.outTake.brat.getCurrentPosition() > -340) {
+//                robot.outTake.brat.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//            }}
+//-338
+            telemetry.addData("brat power", robot.outTake.brat.getPower());
+            telemetry.addData("brat position", robot.outTake.brat.getCurrentPosition());
 
-        robot.outTake.brat.setPower(-gamepad2.left_stick_y);
-        robot.lift.descending.setPower(-gamepad2.right_stick_y);
+            if (gamepad1.dpad_left) {
+                telemetry.addData("AAAAAAAAAAAA", "AAAAAAAAAAAAAAAAAa");
+                telemetry.addData("robot lift asceding power and position", robot.lift.ascending.getCurrentPosition() + " and " + robot.lift.ascending.getPower());
+                robot.lift.ascending.setPower(1);
 
-        telemetry.addData("brat power", robot.outTake.brat.getPower());
+                telemetry.addData("AAAAAAAAAAAA", "AAAAAAAAAAAAAAAAAa");
+                telemetry.addData("robot lift descending power and position", robot.lift.descending.getCurrentPosition() + " and " + robot.lift.descending.getPower());
+                robot.lift.descending.setPower(1);
 
-        telemetry.addData("brat position", robot.outTake.brat.getCurrentPosition());
+            } else if (gamepad1.dpad_right) {
+                telemetry.addData("AAAAAAAAAAAA", "AAAAAAAAAAAAAAAAAa");
+                telemetry.addData("robot lift asceding power and position", robot.lift.ascending.getCurrentPosition() + " and " + robot.lift.ascending.getPower());
+                robot.lift.ascending.setPower(-1);
 
+                telemetry.addData("AAAAAAAAAAAA", "AAAAAAAAAAAAAAAAAa");
+                telemetry.addData("robot lift descending power and position", robot.lift.descending.getCurrentPosition() + " and " + robot.lift.descending.getPower());
+                robot.lift.descending.setPower(-1);
 
-        if (gamepad1.right_trigger > 0.5) {
-            telemetry.addData("AAAAAAAAAAAA", "AAAAAAAAAAAAAAAAAa");
-            telemetry.addData("robot lift asceding power and position", robot.lift.ascending.getCurrentPosition() + " and " + robot.lift.ascending.getPower());
-            robot.lift.ascending.setPower(-gamepad1.right_trigger);
-        } else if (gamepad1.left_trigger > 0.5) {
-            telemetry.addData("AAAAAAAAAAAA", "AAAAAAAAAAAAAAAAAa");
-            telemetry.addData("robot lift asceding power and position", robot.lift.ascending.getCurrentPosition() + " and " + robot.lift.ascending.getPower());
-            robot.lift.ascending.setPower(gamepad1.left_trigger);
-        } else {
-            robot.lift.ascending.setPower(0);
+            } else {
+                robot.lift.ascending.setPower(0);
+                robot.lift.descending.setPower(0);
+//pe left strange ata la descending
+            }
+
+            robot.drive.updatePoseEstimate();
+
+            telemetry.addData("x", robot.drive.pose.position.x);
+            telemetry.addData("y", robot.drive.pose.position.y);
+            telemetry.addData("heading", robot.drive.pose.heading);
+            telemetry.update();
         }
-
-        robot.drive.updatePoseEstimate();
-
-        telemetry.addData("x", robot.drive.pose.position.x);
-        telemetry.addData("y", robot.drive.pose.position.y);
-        telemetry.addData("heading", robot.drive.pose.heading);
-        telemetry.update();
     }
-}
