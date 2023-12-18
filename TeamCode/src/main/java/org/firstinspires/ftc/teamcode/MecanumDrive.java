@@ -55,7 +55,7 @@ public final class MecanumDrive {
 
         // feedforward parameters (in tick units)
         public double kS = 1.4880577301435278;
-        public double kV =  0.00014300721586278794;
+        public double kV = 0.00014300721586278794;
         public double kA = 0.000065;
 
         // path profile parameters (in inches)
@@ -434,5 +434,9 @@ public final class MecanumDrive {
                 defaultVelConstraint, defaultAccelConstraint,
                 0.25, 0.1
         );
+    }
+
+    public void moveRobot(double x, double y, double h) {
+        setDrivePowers(new PoseVelocity2d(new Vector2d(x, y), h));
     }
 }

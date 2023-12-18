@@ -6,7 +6,9 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class OutTake {
-    public DcMotorEx brat;
+    public DcMotor brat;
+    private final int downPos = 0;
+    private final int upPos = -338;
     Servo dreaptaGripper;
     Servo stangaGripper;
     Servo servoBrat;
@@ -17,29 +19,25 @@ public class OutTake {
         servoBrat = hardwareMap.get(Servo.class, "servoBrat");
         brat.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         brat.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        brat.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     public void prepareCatch(){
         servoBrat.setPosition(0.5);
+        brat.setTargetPosition(downPos);
+        brat.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        brat.setPower(1);
         releasePixels();
-
     }
-
     public void prepareRelease(){
-        //TODO: Set position motor brat
-        servoBrat.setPosition(1);
+        servoBrat.setPosition(0.5);
+        brat.setTargetPosition(upPos);
+        brat.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        brat.setPower(1);
     }
-
     public void catchPixels(){
         dreaptaGripper.setPosition(0.55);
         stangaGripper.setPosition(0.1);
-    }
-
-    public void releasePixelRight(){
-        dreaptaGripper.setPosition(1);
-    }
-    public void releasePixelLeft(){
-        stangaGripper.setPosition(0);
     }
     public void releasePixels(){
         stangaGripper.setPosition(0);

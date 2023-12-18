@@ -15,7 +15,16 @@ public class Intake {
         dreaptaIntake = hardwareMap.get(Servo.class, "dreaptaIntake");
         stangaIntake.setPosition(0.48);
     }
+    public void resIntake(){
+        dreaptaIntake.setPosition(0.13);
+        stangaIntake.setPosition(0.87);
 
+    }
+    public void lowIntake(){
+        dreaptaIntake.setPosition(0.6);
+        stangaIntake.setPosition(0.4);
+
+    }
     public void takeIn(){
         intake.setPower(1);
     }

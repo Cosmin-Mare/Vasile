@@ -14,10 +14,12 @@ public class Robot {
     MecanumDrive drive;
     Intake intake;
     OutTake outTake;
-    public Robot(HardwareMap hardwareMap, Telemetry telemetry, ElapsedTime time) {
-        lift = new Lift(hardwareMap, telemetry, time);
+    public Robot(HardwareMap hardwareMap) {
+        lift = new Lift(hardwareMap);
         drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
         intake = new Intake(hardwareMap);
         outTake = new OutTake(hardwareMap);
     }
+
+
 }
