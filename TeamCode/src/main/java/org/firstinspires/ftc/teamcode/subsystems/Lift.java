@@ -12,56 +12,40 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 
 public class Lift {
-    public Servo tureta;
-    public Servo unghiTureta;
-    public Servo avion;
-
-
-
-//    public DcMotorEx ascending;
-//    public DcMotorEx descending;
-
-    private final int MIN_POS_DESC = 0;
-    private final int MAX_POS_ASC = 999999999;
-
-    private final int MAX_POS_DESC = 999999999;
-    private final int MIN_POS_ASC = 0;
+    public DcMotorEx ascending;
+    public DcMotorEx descending;
 
     public Lift(@NonNull HardwareMap hardwareMap) {
-//        ascending = hardwareMap.get(DcMotorEx.class, "ascending");
-//        descending = hardwareMap.get(DcMotorEx.class, "descending");
-//
-//        ascending.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        descending.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//
+        ascending = hardwareMap.get(DcMotorEx.class, "ascending");
+        descending = hardwareMap.get(DcMotorEx.class, "descending");
+
 //        ascending.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 //        descending.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-//        tureta = hardwareMap.get(Servo.class, "tureta");
-//        tureta.setPosition(0);
+//        ascending.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        descending.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //
-//        unghiTureta = hardwareMap.get(Servo.class, "unghiTureta");
-//        unghiTureta.setPosition(0);
-
-        avion = hardwareMap.get(Servo.class, "avion");
-        avion.setPosition(0);
+        ascending.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        descending.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
-//    public void ascend() {
-//        if(ascending.getCurrentPosition() >= MIN_POS_ASC && ascending.getCurrentPosition() <= MAX_POS_ASC &&
-//        descending.getCurrentPosition() >= MIN_POS_DESC && descending.getCurrentPosition() <= MAX_POS_DESC) {
-//            ascending.setPower(-1);
-//            descending.setTargetPosition(ascending.getCurrentPosition());
-//            descending.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//            descending.setPower(1);
-//        }
-//    }
-//    public void descend() {
-//        if(ascending.getCurrentPosition() >= MIN_POS_ASC && ascending.getCurrentPosition() <= MAX_POS_ASC &&
-//                descending.getCurrentPosition() >= MIN_POS_DESC && descending.getCurrentPosition() <= MAX_POS_DESC) {
-//            ascending.setPower(1);
-//            descending.setTargetPosition(ascending.getCurrentPosition());
-//            descending.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//            descending.setPower(1);
-//        }
-//    }
+
+    public void ascend() {
+        ascending.setPower(-1);
+        descending.setTargetPosition(ascending.getCurrentPosition());
+        descending.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        descending.setPower(1);
+    }
+
+    public void descend() {
+        ascending.setPower(1);
+        descending.setTargetPosition(ascending.getCurrentPosition());
+        descending.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        descending.setPower(1);
+    }
+
+    public void stop() {
+        ascending.setPower(0);
+        descending.setPower(0);
+    }
+
 }

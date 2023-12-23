@@ -8,11 +8,12 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class OutTake {
     public DcMotor brat;
     private final int downPos = 0;
-    private final int upPos = -338;
+    private final int upPos = -280;
     Servo dreaptaGripper;
     Servo stangaGripper;
     Servo servoBrat;
-    public OutTake(HardwareMap hardwareMap){
+
+    public OutTake(HardwareMap hardwareMap) {
         brat = hardwareMap.get(DcMotorEx.class, "brat");
         dreaptaGripper = hardwareMap.get(Servo.class, "dreaptaGripper");
         stangaGripper = hardwareMap.get(Servo.class, "stangaGripper");
@@ -22,25 +23,28 @@ public class OutTake {
         brat.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
-    public void prepareCatch(){
+    public void prepareCatch() {
         servoBrat.setPosition(0.5);
         brat.setTargetPosition(downPos);
         brat.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         brat.setPower(1);
         releasePixels();
     }
-    public void prepareRelease(){
+
+    public void prepareRelease() {
         servoBrat.setPosition(0.5);
         brat.setTargetPosition(upPos);
         brat.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         brat.setPower(1);
     }
-    public void catchPixels(){
-        dreaptaGripper.setPosition(0.55);
-        stangaGripper.setPosition(0.1);
+
+    public void catchPixels() {
+//        dreaptaGripper.setPosition(0.55);
+//        stangaGripper.setPosition(0.1);
     }
-    public void releasePixels(){
-        stangaGripper.setPosition(0);
-        dreaptaGripper.setPosition(0.8);
+
+    public void releasePixels() {
+//        stangaGripper.setPosition(0);
+//        dreaptaGripper.setPosition(0.8);
     }
 }
